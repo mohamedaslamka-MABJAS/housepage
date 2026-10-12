@@ -1,9 +1,706 @@
-<!-- Clean Footer Bar with Visitor Badge -->
-    <footer class="w-full text-center py-3 shrink-0 flex flex-col items-center gap-2">
+<!DOCTYPE html>
+<html lang="en" class="h-full w-full">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>MABJAS WEB HUB</title>
+  
+  <!-- Favicon / Tab Logo Configuration -->
+  <link rel="icon" type="image/png" href="MABJAS LOGO.png">
+  <link rel="apple-touch-icon" href="MABJAS LOGO.png">
+
+  <!-- Primary Meta Tags -->
+  <meta name="title" content="MABJAS WEB HUB">
+  <meta name="description" content="MABJAS WEB HUB is a responsive web portal featuring offline browser tools: 360 Spherical Viewer, QR Generator, PDF Editor, and Age Calculator.">
+
+  <!-- Open Graph / Social Media Sharing Preview (WhatsApp, LinkedIn, Twitter) -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="MABJAS WEB HUB">
+  <meta property="og:description" content="Explore private, offline browser utility tools by MABJAS.">
+  <meta property="og:image" content="MABJAS LOGO.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="MABJAS LOGO.png">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Lucide Icons CDN -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  
+  <!-- Google Fonts - Montserrat & Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@800;900&display=swap" rel="stylesheet">
+
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            display: ['Montserrat', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    :root {
+      --bg-main: #090d16;
+      --card-bg: rgba(255, 255, 255, 0.04);
+      --card-border: rgba(255, 255, 255, 0.12);
+      --card-shadow: rgba(0, 0, 0, 0.6);
+      --accent-glow: rgba(56, 189, 248, 0.35);
+      --font-scale: 16px;
+      --text-main: #f8fafc;
+    }
+
+    html, body {
+      min-height: 100%;
+      width: 100%;
+      font-size: var(--font-scale);
+      user-select: none;
+      touch-action: manipulation;
+    }
+
+    /* --- THEME VARIATIONS --- */
+    /* 1. Pure White Theme */
+    body[data-style="pure-white"] {
+      --bg-main: #ffffff;
+      --card-bg: rgba(0, 0, 0, 0.04);
+      --card-border: rgba(0, 0, 0, 0.12);
+      --card-shadow: rgba(0, 0, 0, 0.08);
+      --accent-glow: rgba(14, 165, 233, 0.25);
+      --text-main: #0f172a;
+    }
+    body[data-style="pure-white"] .theme-adapt-subtext { color: #475569 !important; }
+
+    /* 2. Dark Background Theme (DEFAULT INITIAL STYLE) */
+    body[data-style="dark"] {
+      --bg-main: #090d16;
+      --card-bg: rgba(255, 255, 255, 0.04);
+      --card-border: rgba(255, 255, 255, 0.12);
+      --card-shadow: rgba(0, 0, 0, 0.6);
+      --accent-glow: rgba(56, 189, 248, 0.35);
+      --text-main: #f8fafc;
+    }
+
+    /* 3. Water Transparent Theme */
+    body[data-style="water"] {
+      --bg-main: #0284c7;
+      --card-bg: rgba(255, 255, 255, 0.12);
+      --card-border: rgba(255, 255, 255, 0.3);
+      --card-shadow: rgba(2, 132, 199, 0.5);
+      --accent-glow: rgba(255, 255, 255, 0.6);
+      --text-main: #ffffff;
+    }
+
+    /* 4. Default Cosmic Glass Theme */
+    body[data-style="default"] {
+      --bg-main: #030712;
+      --card-bg: rgba(255, 255, 255, 0.05);
+      --card-border: rgba(255, 255, 255, 0.15);
+      --card-shadow: rgba(0, 0, 0, 0.5);
+      --accent-glow: rgba(168, 85, 247, 0.4);
+      --text-main: #ffffff;
+    }
+
+    /* 5. Smoky Fog Theme */
+    body[data-style="smoky"] {
+      --bg-main: #111827;
+      --card-bg: rgba(255, 255, 255, 0.06);
+      --card-border: rgba(156, 163, 175, 0.25);
+      --card-shadow: rgba(0, 0, 0, 0.7);
+      --accent-glow: rgba(156, 163, 175, 0.35);
+      --text-main: #f3f4f6;
+    }
+
+    /* 6. Vapourwave Theme */
+    body[data-style="vapour"] {
+      --bg-main: #2e1065;
+      --card-bg: rgba(236, 72, 153, 0.1);
+      --card-border: rgba(244, 114, 182, 0.35);
+      --card-shadow: rgba(192, 38, 211, 0.4);
+      --accent-glow: rgba(244, 114, 182, 0.6);
+      --text-main: #ffffff;
+    }
+
+    /* 7. Seafoam Aqua Theme */
+    body[data-style="foam"] {
+      --bg-main: #042f2e;
+      --card-bg: rgba(45, 212, 191, 0.08);
+      --card-border: rgba(45, 212, 191, 0.25);
+      --card-shadow: rgba(15, 118, 110, 0.5);
+      --accent-glow: rgba(45, 212, 191, 0.5);
+      --text-main: #ccfbf1;
+    }
+
+    /* Glossy Glass Container */
+    .water-glass {
+      background: var(--card-bg);
+      backdrop-filter: blur(16px) saturate(180%);
+      -webkit-backdrop-filter: blur(16px) saturate(180%);
+      border: 1px solid var(--card-border);
+      box-shadow: 0 8px 32px 0 var(--card-shadow), inset 0 1px 1px 0 rgba(255, 255, 255, 0.2);
+      transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .water-glass:hover {
+      border-color: rgba(255, 255, 255, 0.45);
+      box-shadow: 0 14px 35px 0 var(--card-shadow), 0 0 25px var(--accent-glow);
+    }
+
+    /* 3D Glass Typography Effect */
+    .text-3d-glass {
+      font-family: 'Montserrat', sans-serif;
+      background: linear-gradient(180deg, #ffffff 0%, #38bdf8 45%, #818cf8 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 
+        0 2px 4px rgba(0,0,0,0.4),
+        0 8px 20px rgba(0,0,0,0.5),
+        0 0 30px var(--accent-glow);
+      filter: drop-shadow(0px 8px 16px rgba(0, 0, 0, 0.6));
+    }
+
+    body[data-style="pure-white"] .text-3d-glass {
+      background: linear-gradient(180deg, #0284c7 0%, #2563eb 50%, #4f46e5 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 4px 12px rgba(37, 99, 235, 0.25);
+      filter: none;
+    }
+
+    /* Shimmer animation on hover */
+    .shimmer-bar {
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+      animation: shimmer 2.5s infinite linear;
+    }
+
+    @keyframes shimmer {
+      0% { transform: translateX(-100%); }
+      100% { transform: translateX(100%); }
+    }
+
+    @keyframes floatSlow {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-6px); }
+    }
+
+    .animate-float {
+      animation: floatSlow 5s ease-in-out infinite;
+    }
+  </style>
+</head>
+
+<body data-style="dark" class="min-h-full w-full relative font-sans flex flex-col justify-between transition-colors duration-500 overflow-y-auto lg:overflow-hidden">
+
+  <!-- Dynamic Background Canvas -->
+  <canvas id="bgCanvas" class="fixed inset-0 w-full h-full z-0 pointer-events-none"></canvas>
+
+  <div class="relative z-10 w-full min-h-screen lg:h-screen flex flex-col justify-between p-3 sm:p-5 md:p-6 max-w-7xl mx-auto">
+
+    <!-- Top Navigation Header -->
+    <header class="w-full flex items-center justify-between gap-2 shrink-0">
+      <!-- Branding Title -->
+      <div class="water-glass px-3.5 py-2 rounded-full flex items-center gap-2.5">
+        <div class="w-2.5 h-2.5 rounded-full bg-cyan-400 animate-ping"></div>
+        <span class="font-bold tracking-wider text-xs sm:text-sm text-cyan-300">MABJAS <span class="text-amber-300 font-extrabold">WEB HUB</span></span>
+      </div>
+
+      <!-- Center Live Clock Widget -->
+      <div id="widgetClock" class="flex water-glass px-4 py-1.5 rounded-full items-center gap-2 text-xs font-mono text-emerald-300 tracking-widest">
+        <i data-lucide="clock" class="w-3.5 h-3.5 text-emerald-400"></i>
+        <span id="timeDisplay" class="text-emerald-200">00:00:00 AM</span>
+      </div>
+
+      <!-- Settings Dropdown Trigger Button -->
+      <div class="relative">
+        <button id="customizerBtn" onclick="playClickSound()" class="water-glass p-2.5 rounded-full hover:rotate-45 transition-transform duration-300 flex items-center justify-center focus:outline-none" title="Themes & Settings">
+          <i data-lucide="sliders" class="w-4 h-4 sm:w-5 sm:h-5 text-amber-300"></i>
+        </button>
+
+        <!-- Settings Customizer Panel -->
+        <div id="customizerPanel" class="hidden absolute right-0 mt-3 w-72 sm:w-80 water-glass rounded-2xl p-4 sm:p-5 shadow-2xl z-50 border border-white/20 transition-all duration-300">
+          <div class="flex items-center justify-between mb-3 border-b border-white/10 pb-2">
+            <span class="text-xs uppercase font-bold tracking-wider text-cyan-300 flex items-center gap-1.5">
+              <i data-lucide="palette" class="w-4 h-4 text-purple-400"></i> Theme & Customizer
+            </span>
+            <button id="closePanelBtn" onclick="playClickSound()" class="text-white/60 hover:text-white"><i data-lucide="x" class="w-4 h-4"></i></button>
+          </div>
+
+          <!-- Background Styles (7 Options) -->
+          <div class="mb-4">
+            <label class="text-[11px] text-amber-200/90 block mb-2 font-medium">Select Background Style</label>
+            <div class="grid grid-cols-2 gap-1.5 text-xs">
+              <button onclick="setThemeStyle('dark')" class="px-2 py-1.5 rounded-lg bg-gray-900 text-gray-200 border border-gray-700 text-left flex items-center gap-1.5 font-bold"><span class="w-2 h-2 rounded-full bg-cyan-400"></span> Dark (Default)</button>
+              <button onclick="setThemeStyle('water')" class="px-2 py-1.5 rounded-lg bg-sky-500/30 hover:bg-sky-500/50 text-sky-200 border border-sky-400/40 text-left flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-sky-400"></span> Water</button>
+              <button onclick="setThemeStyle('pure-white')" class="px-2 py-1.5 rounded-lg bg-white text-slate-900 border border-slate-300 font-medium text-left flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-slate-900"></span> Pure White</button>
+              <button onclick="setThemeStyle('default')" class="px-2 py-1.5 rounded-lg bg-purple-950/60 text-purple-200 border border-purple-500/30 text-left flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-purple-400"></span> Cosmic</button>
+              <button onclick="setThemeStyle('smoky')" class="px-2 py-1.5 rounded-lg bg-slate-800 text-slate-300 border border-slate-600 text-left flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-slate-400"></span> Smoky</button>
+              <button onclick="setThemeStyle('vapour')" class="px-2 py-1.5 rounded-lg bg-pink-950/60 text-pink-200 border border-pink-500/40 text-left flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-pink-400"></span> Vapour</button>
+              <button onclick="setThemeStyle('foam')" class="px-2 py-1.5 rounded-lg bg-teal-950/60 text-teal-200 border border-teal-500/40 text-left flex items-center gap-1.5 col-span-2"><span class="w-2 h-2 rounded-full bg-teal-300"></span> Foam / Seafoam</button>
+            </div>
+          </div>
+
+          <!-- Font Scaling Options -->
+          <div class="mb-3">
+            <label class="text-[11px] text-amber-200/90 block mb-1.5 font-medium">Text Size Scale</label>
+            <div class="flex bg-black/20 p-1 rounded-xl border border-white/10 gap-1 text-xs">
+              <button onclick="setFontScale('small')" class="flex-1 py-1 rounded-lg text-rose-300 hover:bg-white/10">Compact</button>
+              <button onclick="setFontScale('medium')" class="flex-1 py-1 rounded-lg text-emerald-300 bg-white/20 font-bold">Normal</button>
+              <button onclick="setFontScale('large')" class="flex-1 py-1 rounded-lg text-amber-300 hover:bg-white/10">Large</button>
+            </div>
+          </div>
+
+          <!-- Audio Sound Effects Toggle -->
+          <div class="pt-2 border-t border-white/10">
+            <label class="flex items-center justify-between text-xs text-cyan-200 cursor-pointer bg-white/5 p-2 rounded-lg">
+              <span class="flex items-center gap-1.5"><i data-lucide="volume-2" class="w-3.5 h-3.5 text-amber-300"></i> Click Sound Effects</span>
+              <input type="checkbox" id="soundToggle" checked class="accent-amber-400 rounded cursor-pointer" />
+            </label>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Center Hero Section -->
+    <main class="flex-1 flex flex-col justify-center items-center text-center my-auto py-3">
+      <!-- 3D Glass WELCOME Headline -->
+      <div class="relative animate-float mb-2 sm:mb-4">
+        <h1 class="text-3d-glass text-4xl sm:text-6xl md:text-7xl font-black tracking-widest uppercase">
+          WELCOME
+        </h1>
+      </div>
+
+      <!-- Links Grid Cards (Responsive 4-Card Grid Layout) -->
+      <div class="w-full max-w-7xl grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 px-1">
+
+        <!-- Tool Card 1: 360 Spherical Viewer -->
+        <a href="https://mohamedaslamka-mabjas.github.io/360-spherical-viewer/" 
+           target="_blank" 
+           rel="noopener noreferrer" 
+           onclick="playClickSound()"
+           class="water-glass group relative rounded-2xl p-4 text-left flex flex-col justify-between overflow-hidden cursor-pointer">
+          
+          <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
+            <div class="shimmer-bar h-full w-full"></div>
+          </div>
+
+          <div>
+            <div class="flex items-center justify-between mb-2">
+              <div class="w-9 h-9 rounded-xl bg-rose-500/20 border border-rose-400/40 flex items-center justify-center text-rose-300 group-hover:scale-110 group-hover:bg-rose-500/30 transition-all duration-300 shadow-lg">
+                <i data-lucide="globe" class="w-5 h-5"></i>
+              </div>
+              <span class="text-[10px] font-mono font-bold tracking-wider uppercase bg-rose-500/20 text-rose-300 border border-rose-400/30 px-2 py-0.5 rounded-full flex items-center gap-1">
+                <i data-lucide="eye" class="w-3 h-3 text-rose-300"></i> <span class="text-pink-300">PANORAMIC 3D</span>
+              </span>
+            </div>
+
+            <h2 class="text-base font-bold text-rose-200 group-hover:text-amber-300 transition-colors duration-300 flex items-center justify-between">
+              360° Spherical Viewer
+              <i data-lucide="arrow-up-right" class="w-4 h-4 text-amber-300 opacity-80 group-hover:opacity-100 transition-all transform group-hover:translate-x-1 group-hover:-translate-y-1"></i>
+            </h2>
+
+            <p class="theme-adapt-subtext text-xs text-rose-100/80 mt-1.5 leading-relaxed">
+              Interactive 360-degree photo viewer studio. Upload and render equirectangular panoramic photos seamlessly directly inside your browser.
+            </p>
+          </div>
+
+          <div class="mt-3 pt-2 border-t border-white/10 grid grid-cols-2 gap-1 text-[10px] font-medium">
+            <div class="flex items-center gap-1 text-pink-300">
+              <i data-lucide="check-circle-2" class="w-3 h-3 text-pink-400"></i> Equirectangular
+            </div>
+            <div class="flex items-center gap-1 text-amber-300">
+              <i data-lucide="check-circle-2" class="w-3 h-3 text-amber-400"></i> 100% Local
+            </div>
+          </div>
+        </a>
+
+        <!-- Tool Card 2: QR Generator -->
+        <a href="https://mohamedaslamka-mabjas.github.io/free-offline-qr-code-generator-MABJAS/" 
+           target="_blank" 
+           rel="noopener noreferrer" 
+           onclick="playClickSound()"
+           class="water-glass group relative rounded-2xl p-4 text-left flex flex-col justify-between overflow-hidden cursor-pointer">
+          
+          <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
+            <div class="shimmer-bar h-full w-full"></div>
+          </div>
+
+          <div>
+            <div class="flex items-center justify-between mb-2">
+              <div class="w-9 h-9 rounded-xl bg-cyan-500/20 border border-cyan-400/40 flex items-center justify-center text-cyan-300 group-hover:scale-110 group-hover:bg-cyan-500/30 transition-all duration-300 shadow-lg">
+                <i data-lucide="qr-code" class="w-5 h-5"></i>
+              </div>
+              <span class="text-[10px] font-mono font-bold tracking-wider uppercase bg-cyan-500/20 text-cyan-300 border border-cyan-400/30 px-2 py-0.5 rounded-full flex items-center gap-1">
+                <i data-lucide="shield-check" class="w-3 h-3 text-cyan-300"></i> <span class="text-emerald-300">100% OFFLINE</span>
+              </span>
+            </div>
+
+            <h2 class="text-base font-bold text-cyan-200 group-hover:text-amber-300 transition-colors duration-300 flex items-center justify-between">
+              Free Offline QR Generator
+              <i data-lucide="arrow-up-right" class="w-4 h-4 text-amber-300 opacity-80 group-hover:opacity-100 transition-all transform group-hover:translate-x-1 group-hover:-translate-y-1"></i>
+            </h2>
+
+            <p class="theme-adapt-subtext text-xs text-sky-100/80 mt-1.5 leading-relaxed">
+              A private browser studio for creating customized QR codes instantly with logo embeds, vector exports, and color palettes.
+            </p>
+          </div>
+
+          <div class="mt-3 pt-2 border-t border-white/10 grid grid-cols-2 gap-1 text-[10px] font-medium">
+            <div class="flex items-center gap-1 text-teal-300">
+              <i data-lucide="check-circle-2" class="w-3 h-3 text-teal-400"></i> Logo Overlays
+            </div>
+            <div class="flex items-center gap-1 text-purple-300">
+              <i data-lucide="check-circle-2" class="w-3 h-3 text-purple-400"></i> SVG / PNG Export
+            </div>
+          </div>
+        </a>
+
+        <!-- Tool Card 3: PDF File Editor -->
+        <a href="https://mohamedaslamka-mabjas.github.io/free-offline-pdf-file-editor-studio-MABJAS/" 
+           target="_blank" 
+           rel="noopener noreferrer" 
+           onclick="playClickSound()"
+           class="water-glass group relative rounded-2xl p-4 text-left flex flex-col justify-between overflow-hidden cursor-pointer">
+          
+          <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
+            <div class="shimmer-bar h-full w-full"></div>
+          </div>
+
+          <div>
+            <div class="flex items-center justify-between mb-2">
+              <div class="w-9 h-9 rounded-xl bg-purple-500/20 border border-purple-400/40 flex items-center justify-center text-purple-300 group-hover:scale-110 group-hover:bg-purple-500/30 transition-all duration-300 shadow-lg">
+                <i data-lucide="file-text" class="w-5 h-5"></i>
+              </div>
+              <span class="text-[10px] font-mono font-bold tracking-wider uppercase bg-purple-500/20 text-purple-300 border border-purple-400/30 px-2 py-0.5 rounded-full flex items-center gap-1">
+                <i data-lucide="lock" class="w-3 h-3 text-purple-300"></i> <span class="text-pink-300">PRIVATE STUDIO</span>
+              </span>
+            </div>
+
+            <h2 class="text-base font-bold text-fuchsia-200 group-hover:text-emerald-300 transition-colors duration-300 flex items-center justify-between">
+              Free Offline PDF Editor
+              <i data-lucide="arrow-up-right" class="w-4 h-4 text-emerald-300 opacity-80 group-hover:opacity-100 transition-all transform group-hover:translate-x-1 group-hover:-translate-y-1"></i>
+            </h2>
+
+            <p class="theme-adapt-subtext text-xs text-fuchsia-100/80 mt-1.5 leading-relaxed">
+              Powerful PDF workspace running entirely in local memory. Split, merge, annotate, compress, and organize documents securely.
+            </p>
+          </div>
+
+          <div class="mt-3 pt-2 border-t border-white/10 grid grid-cols-2 gap-1 text-[10px] font-medium">
+            <div class="flex items-center gap-1 text-amber-300">
+              <i data-lucide="check-circle-2" class="w-3 h-3 text-amber-400"></i> Split & Merge
+            </div>
+            <div class="flex items-center gap-1 text-emerald-300">
+              <i data-lucide="check-circle-2" class="w-3 h-3 text-emerald-400"></i> Zero Data Upload
+            </div>
+          </div>
+        </a>
+
+        <!-- Tool Card 4: Age Calculator Studio -->
+        <a href="https://mohamedaslamka-mabjas.github.io/age-calculator/" 
+           target="_blank" 
+           rel="noopener noreferrer" 
+           onclick="playClickSound()"
+           class="water-glass group relative rounded-2xl p-4 text-left flex flex-col justify-between overflow-hidden cursor-pointer">
+          
+          <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
+            <div class="shimmer-bar h-full w-full"></div>
+          </div>
+
+          <div>
+            <div class="flex items-center justify-between mb-2">
+              <div class="w-9 h-9 rounded-xl bg-amber-500/20 border border-amber-400/40 flex items-center justify-center text-amber-300 group-hover:scale-110 group-hover:bg-amber-500/30 transition-all duration-300 shadow-lg">
+                <i data-lucide="calculator" class="w-5 h-5"></i>
+              </div>
+              <span class="text-[10px] font-mono font-bold tracking-wider uppercase bg-amber-500/20 text-amber-300 border border-amber-400/30 px-2 py-0.5 rounded-full flex items-center gap-1">
+                <i data-lucide="users" class="w-3 h-3 text-amber-300"></i> <span class="text-amber-200">MULTI-PERSON</span>
+              </span>
+            </div>
+
+            <h2 class="text-base font-bold text-amber-200 group-hover:text-cyan-300 transition-colors duration-300 flex items-center justify-between">
+              Age Calculator Studio
+              <i data-lucide="arrow-up-right" class="w-4 h-4 text-cyan-300 opacity-80 group-hover:opacity-100 transition-all transform group-hover:translate-x-1 group-hover:-translate-y-1"></i>
+            </h2>
+
+            <p class="theme-adapt-subtext text-xs text-amber-100/80 mt-1.5 leading-relaxed">
+              Real-time birth date & time tracking studio featuring live ticking counter, 4-person comparison matrix, CSV export, and birthday weekday projections.
+            </p>
+          </div>
+
+          <div class="mt-3 pt-2 border-t border-white/10 grid grid-cols-2 gap-1 text-[10px] font-medium">
+            <div class="flex items-center gap-1 text-emerald-300">
+              <i data-lucide="check-circle-2" class="w-3 h-3 text-emerald-400"></i> Live Ticking
+            </div>
+            <div class="flex items-center gap-1 text-cyan-300">
+              <i data-lucide="check-circle-2" class="w-3 h-3 text-cyan-400"></i> CSV & Matrix Export
+            </div>
+          </div>
+        </a>
+
+      </div>
+    </main>
+
+    <!-- Clean Footer Bar -->
+    <footer class="w-full text-center py-2 shrink-0">
       <div class="w-12 h-1 bg-gradient-to-r from-cyan-400 via-amber-300 to-purple-500 mx-auto rounded-full opacity-60"></div>
-      
-      <!-- Public Visitor Counter Badge -->
-      <a href="https://mohamedaslamka-mabjas.github.io/housepage/" target="_blank" rel="noopener noreferrer">
-        <img src="https://api.visitorbadge.io/api/combined?path=mohamedaslamka-mabjas.housepage&countColor=%2338bdf8" alt="Visitor Counter" class="opacity-80 hover:opacity-100 transition-opacity" />
-      </a>
     </footer>
+
+  </div>
+
+  <script>
+    // Initialize Lucide Icons
+    lucide.createIcons();
+
+    // 1. Web Audio API Click Sound Synthesizer
+    let audioCtx = null;
+
+    function playClickSound() {
+      const soundEnabled = document.getElementById('soundToggle')?.checked;
+      if (!soundEnabled) return;
+
+      try {
+        if (!audioCtx) {
+          audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        }
+        if (audioCtx.state === 'suspended') {
+          audioCtx.resume();
+        }
+
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(600, audioCtx.currentTime);
+        osc.frequency.exponentialRampToValueAtTime(120, audioCtx.currentTime + 0.08);
+
+        gain.gain.setValueAtTime(0.15, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.08);
+
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+
+        osc.start();
+        osc.stop(audioCtx.currentTime + 0.08);
+      } catch (err) {
+        // Fallback quiet audio handling
+      }
+    }
+
+    // 2. Real-time Clock Display
+    function updateClock() {
+      const timeElem = document.getElementById('timeDisplay');
+      if (timeElem) {
+        const now = new Date();
+        timeElem.textContent = now.toLocaleTimeString();
+      }
+    }
+    setInterval(updateClock, 1000);
+    updateClock();
+
+    // 3. Settings Drawer Controller
+    const customizerBtn = document.getElementById('customizerBtn');
+    const customizerPanel = document.getElementById('customizerPanel');
+    const closePanelBtn = document.getElementById('closePanelBtn');
+
+    customizerBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      customizerPanel.classList.toggle('hidden');
+    });
+
+    closePanelBtn.addEventListener('click', () => {
+      customizerPanel.classList.add('hidden');
+    });
+
+    document.addEventListener('click', (e) => {
+      if (!customizerPanel.contains(e.target) && !customizerBtn.contains(e.target)) {
+        customizerPanel.classList.add('hidden');
+      }
+    });
+
+    // 4. Background Style Switcher (INITIAL DEFAULT: dark)
+    let currentThemeStyle = 'dark';
+
+    function setThemeStyle(styleName) {
+      playClickSound();
+      currentThemeStyle = styleName;
+      document.body.setAttribute('data-style', styleName);
+      initCanvasElements();
+    }
+
+    // 5. Typography Font Scaling
+    function setFontScale(scale) {
+      playClickSound();
+      const root = document.documentElement;
+      if (scale === 'small') root.style.setProperty('--font-scale', '14px');
+      else if (scale === 'medium') root.style.setProperty('--font-scale', '16px');
+      else if (scale === 'large') root.style.setProperty('--font-scale', '18px');
+    }
+
+    // 6. Multi-Theme Dynamic Background Canvas System
+    const canvas = document.getElementById('bgCanvas');
+    const ctx = canvas.getContext('2d');
+
+    let width = canvas.width = window.innerWidth;
+    let height = canvas.height = window.innerHeight;
+
+    let particles = [];
+    let ripples = [];
+
+    window.addEventListener('resize', () => {
+      width = canvas.width = window.innerWidth;
+      height = canvas.height = window.innerHeight;
+      initCanvasElements();
+    });
+
+    class Particle {
+      constructor() {
+        this.reset();
+      }
+
+      reset() {
+        this.x = Math.random() * width;
+        this.y = Math.random() * height;
+        this.size = Math.random() * 4 + 1;
+        this.speedX = (Math.random() - 0.5) * 0.6;
+        this.speedY = (Math.random() - 0.5) * 0.6;
+        this.opacity = Math.random() * 0.5 + 0.2;
+      }
+
+      update() {
+        this.x += this.speedX;
+        this.y += this.speedY;
+
+        if (currentThemeStyle === 'smoky') {
+          this.size += 0.02;
+          this.opacity -= 0.002;
+        }
+
+        if (this.x < 0 || this.x > width || this.y < 0 || this.y > height || this.opacity <= 0) {
+          this.reset();
+        }
+      }
+
+      draw() {
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+
+        if (currentThemeStyle === 'pure-white') {
+          ctx.fillStyle = `rgba(14, 165, 233, ${this.opacity * 0.4})`;
+        } else if (currentThemeStyle === 'vapour') {
+          ctx.fillStyle = `rgba(244, 114, 182, ${this.opacity})`;
+        } else if (currentThemeStyle === 'foam') {
+          ctx.fillStyle = `rgba(153, 246, 228, ${this.opacity})`;
+        } else if (currentThemeStyle === 'smoky') {
+          ctx.fillStyle = `rgba(209, 213, 219, ${this.opacity * 0.3})`;
+        } else {
+          ctx.fillStyle = `rgba(180, 240, 255, ${this.opacity})`;
+        }
+
+        ctx.fill();
+      }
+    }
+
+    class Ripple {
+      constructor(x, y) {
+        this.x = x;
+        this.y = y;
+        this.radius = 2;
+        this.maxRadius = Math.random() * 50 + 35;
+        this.opacity = 0.8;
+        this.speed = Math.random() * 1.5 + 1;
+      }
+
+      update() {
+        this.radius += this.speed;
+        this.opacity -= 0.015;
+      }
+
+      draw() {
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+
+        if (currentThemeStyle === 'pure-white') {
+          ctx.strokeStyle = `rgba(2, 132, 199, ${this.opacity})`;
+        } else if (currentThemeStyle === 'vapour') {
+          ctx.strokeStyle = `rgba(236, 72, 153, ${this.opacity})`;
+        } else if (currentThemeStyle === 'foam') {
+          ctx.strokeStyle = `rgba(45, 212, 191, ${this.opacity})`;
+        } else {
+          ctx.strokeStyle = `rgba(56, 189, 248, ${this.opacity})`;
+        }
+
+        ctx.lineWidth = 1.5;
+        ctx.stroke();
+      }
+    }
+
+    function initCanvasElements() {
+      particles = [];
+      const density = currentThemeStyle === 'smoky' ? 8000 : 12000;
+      const count = Math.floor((width * height) / density);
+      for (let i = 0; i < count; i++) {
+        particles.push(new Particle());
+      }
+    }
+
+    // Touch & Cursor Ripple Listeners
+    window.addEventListener('mousemove', (e) => {
+      if (Math.random() < 0.15) {
+        ripples.push(new Ripple(e.clientX, e.clientY));
+      }
+    });
+
+    window.addEventListener('touchmove', (e) => {
+      if (e.touches.length > 0 && Math.random() < 0.2) {
+        ripples.push(new Ripple(e.touches[0].clientX, e.touches[0].clientY));
+      }
+    });
+
+    function renderCanvas() {
+      if (currentThemeStyle === 'pure-white') {
+        ctx.fillStyle = '#ffffff';
+      } else if (currentThemeStyle === 'dark') {
+        ctx.fillStyle = '#090d16';
+      } else if (currentThemeStyle === 'water') {
+        ctx.fillStyle = '#0284c7';
+      } else if (currentThemeStyle === 'default') {
+        ctx.fillStyle = '#030712';
+      } else if (currentThemeStyle === 'smoky') {
+        ctx.fillStyle = '#111827';
+      } else if (currentThemeStyle === 'vapour') {
+        ctx.fillStyle = '#2e1065';
+      } else if (currentThemeStyle === 'foam') {
+        ctx.fillStyle = '#042f2e';
+      }
+
+      ctx.fillRect(0, 0, width, height);
+
+      particles.forEach((p) => {
+        p.update();
+        p.draw();
+      });
+
+      for (let i = ripples.length - 1; i >= 0; i--) {
+        const r = ripples[i];
+        r.update();
+        r.draw();
+        if (r.opacity <= 0 || r.radius >= r.maxRadius) {
+          ripples.splice(i, 1);
+        }
+      }
+
+      requestAnimationFrame(renderCanvas);
+    }
+
+    window.onload = function () {
+      initCanvasElements();
+      renderCanvas();
+    };
+  </script>
+</body>
+</html>
