@@ -1,19 +1,25 @@
 <!DOCTYPE html>
-<html lang="en" class="h-full w-full overflow-hidden">
+<html lang="en" class="h-full w-full">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <title>MABJAS WEB HUB</title>
   
+  <!-- Favicon / Tab Logo Configuration -->
+  <link rel="icon" type="image/png" href="MABJAS LOGO.png">
+  <link rel="apple-touch-icon" href="MABJAS LOGO.png">
+
   <!-- Primary Meta Tags -->
   <meta name="title" content="MABJAS WEB HUB">
-  <meta name="description" content="MABJAS WEB HUB is a responsive, single-screen interactive web portal featuring a glossy water glassmorphism UI, 3D typography, and customizable ambient background themes.">
+  <meta name="description" content="MABJAS WEB HUB is a responsive web portal featuring offline browser tools: 360 Spherical Viewer, QR Generator, PDF Editor, and Age Calculator.">
 
-  <!-- Open Graph / Social Media Preview Tags -->
+  <!-- Open Graph / Social Media Sharing Preview (WhatsApp, LinkedIn, Twitter) -->
   <meta property="og:type" content="website">
   <meta property="og:title" content="MABJAS WEB HUB">
-  <meta property="og:description" content="MABJAS WEB HUB is a responsive, single-screen interactive web portal featuring a glossy water glassmorphism UI, 3D typography, and customizable ambient background themes.">
-  <meta property="og:image" content="https://mohamedaslamka-mabjas.github.io/age-calculator/preview.png">
+  <meta property="og:description" content="Explore private, offline browser utility tools by MABJAS.">
+  <meta property="og:image" content="MABJAS LOGO.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="MABJAS LOGO.png">
 
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -46,18 +52,14 @@
       --card-bg: rgba(255, 255, 255, 0.04);
       --card-border: rgba(255, 255, 255, 0.12);
       --card-shadow: rgba(0, 0, 0, 0.6);
-      --text-welcome-start: #38bdf8;
-      --text-welcome-end: #c084fc;
       --accent-glow: rgba(56, 189, 248, 0.35);
       --font-scale: 16px;
       --text-main: #f8fafc;
     }
 
     html, body {
-      height: 100%;
-      height: 100dvh;
+      min-height: 100%;
       width: 100%;
-      overflow: hidden;
       font-size: var(--font-scale);
       user-select: none;
       touch-action: manipulation;
@@ -73,9 +75,7 @@
       --accent-glow: rgba(14, 165, 233, 0.25);
       --text-main: #0f172a;
     }
-    body[data-style="pure-white"] .theme-adapt-text { color: #0f172a !important; }
     body[data-style="pure-white"] .theme-adapt-subtext { color: #475569 !important; }
-    body[data-style="pure-white"] .water-glass { backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); }
 
     /* 2. Dark Background Theme (DEFAULT INITIAL STYLE) */
     body[data-style="dark"] {
@@ -195,15 +195,15 @@
   </style>
 </head>
 
-<body data-style="dark" class="h-full w-full relative select-none font-sans flex flex-col justify-between transition-colors duration-500">
+<body data-style="dark" class="min-h-full w-full relative font-sans flex flex-col justify-between transition-colors duration-500 overflow-y-auto lg:overflow-hidden">
 
   <!-- Dynamic Background Canvas -->
-  <canvas id="bgCanvas" class="absolute inset-0 w-full h-full z-0 pointer-events-none"></canvas>
+  <canvas id="bgCanvas" class="fixed inset-0 w-full h-full z-0 pointer-events-none"></canvas>
 
-  <div class="relative z-10 w-full h-full flex flex-col justify-between p-3 sm:p-5 md:p-8 max-w-7xl mx-auto">
+  <div class="relative z-10 w-full min-h-screen lg:h-screen flex flex-col justify-between p-3 sm:p-5 md:p-6 max-w-7xl mx-auto">
 
     <!-- Top Navigation Header -->
-    <header class="w-full flex items-center justify-between gap-2">
+    <header class="w-full flex items-center justify-between gap-2 shrink-0">
       <!-- Branding Title -->
       <div class="water-glass px-3.5 py-2 rounded-full flex items-center gap-2.5">
         <div class="w-2.5 h-2.5 rounded-full bg-cyan-400 animate-ping"></div>
@@ -267,23 +267,23 @@
     </header>
 
     <!-- Main Center Hero Section -->
-    <main class="flex-1 flex flex-col justify-center items-center text-center my-auto py-2">
+    <main class="flex-1 flex flex-col justify-center items-center text-center my-auto py-3">
       <!-- 3D Glass WELCOME Headline -->
-      <div class="relative animate-float mb-3 md:mb-5">
-        <h1 class="text-3d-glass text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-black tracking-widest uppercase">
+      <div class="relative animate-float mb-2 sm:mb-4">
+        <h1 class="text-3d-glass text-4xl sm:text-6xl md:text-7xl font-black tracking-widest uppercase">
           WELCOME
         </h1>
       </div>
 
-      <!-- Links Grid Cards (3 Column Layout) -->
-      <div class="w-full max-w-6xl grid grid-cols-1 md:grid-cols-3 gap-3 sm:gap-4 md:gap-5 px-1">
+      <!-- Links Grid Cards (Responsive 4-Card Grid Layout) -->
+      <div class="w-full max-w-7xl grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 px-1">
 
-        <!-- Tool Card 1: QR Generator -->
-        <a href="https://mohamedaslamka-mabjas.github.io/free-offline-qr-code-generator-MABJAS/" 
+        <!-- Tool Card 1: 360 Spherical Viewer -->
+        <a href="https://mohamedaslamka-mabjas.github.io/360-spherical-viewer/" 
            target="_blank" 
            rel="noopener noreferrer" 
            onclick="playClickSound()"
-           class="water-glass group relative rounded-2xl p-4 sm:p-5 text-left flex flex-col justify-between overflow-hidden cursor-pointer">
+           class="water-glass group relative rounded-2xl p-4 text-left flex flex-col justify-between overflow-hidden cursor-pointer">
           
           <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
             <div class="shimmer-bar h-full w-full"></div>
@@ -291,7 +291,48 @@
 
           <div>
             <div class="flex items-center justify-between mb-2">
-              <div class="w-9 h-9 sm:w-11 sm:h-11 rounded-xl bg-cyan-500/20 border border-cyan-400/40 flex items-center justify-center text-cyan-300 group-hover:scale-110 group-hover:bg-cyan-500/30 transition-all duration-300 shadow-lg">
+              <div class="w-9 h-9 rounded-xl bg-rose-500/20 border border-rose-400/40 flex items-center justify-center text-rose-300 group-hover:scale-110 group-hover:bg-rose-500/30 transition-all duration-300 shadow-lg">
+                <i data-lucide="globe" class="w-5 h-5"></i>
+              </div>
+              <span class="text-[10px] font-mono font-bold tracking-wider uppercase bg-rose-500/20 text-rose-300 border border-rose-400/30 px-2 py-0.5 rounded-full flex items-center gap-1">
+                <i data-lucide="eye" class="w-3 h-3 text-rose-300"></i> <span class="text-pink-300">PANORAMIC 3D</span>
+              </span>
+            </div>
+
+            <h2 class="text-base font-bold text-rose-200 group-hover:text-amber-300 transition-colors duration-300 flex items-center justify-between">
+              360° Spherical Viewer
+              <i data-lucide="arrow-up-right" class="w-4 h-4 text-amber-300 opacity-80 group-hover:opacity-100 transition-all transform group-hover:translate-x-1 group-hover:-translate-y-1"></i>
+            </h2>
+
+            <p class="theme-adapt-subtext text-xs text-rose-100/80 mt-1.5 leading-relaxed">
+              Interactive 360-degree photo viewer studio. Upload and render equirectangular panoramic photos seamlessly directly inside your browser.
+            </p>
+          </div>
+
+          <div class="mt-3 pt-2 border-t border-white/10 grid grid-cols-2 gap-1 text-[10px] font-medium">
+            <div class="flex items-center gap-1 text-pink-300">
+              <i data-lucide="check-circle-2" class="w-3 h-3 text-pink-400"></i> Equirectangular
+            </div>
+            <div class="flex items-center gap-1 text-amber-300">
+              <i data-lucide="check-circle-2" class="w-3 h-3 text-amber-400"></i> 100% Local
+            </div>
+          </div>
+        </a>
+
+        <!-- Tool Card 2: QR Generator -->
+        <a href="https://mohamedaslamka-mabjas.github.io/free-offline-qr-code-generator-MABJAS/" 
+           target="_blank" 
+           rel="noopener noreferrer" 
+           onclick="playClickSound()"
+           class="water-glass group relative rounded-2xl p-4 text-left flex flex-col justify-between overflow-hidden cursor-pointer">
+          
+          <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
+            <div class="shimmer-bar h-full w-full"></div>
+          </div>
+
+          <div>
+            <div class="flex items-center justify-between mb-2">
+              <div class="w-9 h-9 rounded-xl bg-cyan-500/20 border border-cyan-400/40 flex items-center justify-center text-cyan-300 group-hover:scale-110 group-hover:bg-cyan-500/30 transition-all duration-300 shadow-lg">
                 <i data-lucide="qr-code" class="w-5 h-5"></i>
               </div>
               <span class="text-[10px] font-mono font-bold tracking-wider uppercase bg-cyan-500/20 text-cyan-300 border border-cyan-400/30 px-2 py-0.5 rounded-full flex items-center gap-1">
@@ -299,7 +340,7 @@
               </span>
             </div>
 
-            <h2 class="text-base sm:text-lg font-bold text-cyan-200 group-hover:text-amber-300 transition-colors duration-300 flex items-center justify-between">
+            <h2 class="text-base font-bold text-cyan-200 group-hover:text-amber-300 transition-colors duration-300 flex items-center justify-between">
               Free Offline QR Generator
               <i data-lucide="arrow-up-right" class="w-4 h-4 text-amber-300 opacity-80 group-hover:opacity-100 transition-all transform group-hover:translate-x-1 group-hover:-translate-y-1"></i>
             </h2>
@@ -319,12 +360,12 @@
           </div>
         </a>
 
-        <!-- Tool Card 2: PDF File Editor -->
+        <!-- Tool Card 3: PDF File Editor -->
         <a href="https://mohamedaslamka-mabjas.github.io/free-offline-pdf-file-editor-studio-MABJAS/" 
            target="_blank" 
            rel="noopener noreferrer" 
            onclick="playClickSound()"
-           class="water-glass group relative rounded-2xl p-4 sm:p-5 text-left flex flex-col justify-between overflow-hidden cursor-pointer">
+           class="water-glass group relative rounded-2xl p-4 text-left flex flex-col justify-between overflow-hidden cursor-pointer">
           
           <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
             <div class="shimmer-bar h-full w-full"></div>
@@ -332,7 +373,7 @@
 
           <div>
             <div class="flex items-center justify-between mb-2">
-              <div class="w-9 h-9 sm:w-11 sm:h-11 rounded-xl bg-purple-500/20 border border-purple-400/40 flex items-center justify-center text-purple-300 group-hover:scale-110 group-hover:bg-purple-500/30 transition-all duration-300 shadow-lg">
+              <div class="w-9 h-9 rounded-xl bg-purple-500/20 border border-purple-400/40 flex items-center justify-center text-purple-300 group-hover:scale-110 group-hover:bg-purple-500/30 transition-all duration-300 shadow-lg">
                 <i data-lucide="file-text" class="w-5 h-5"></i>
               </div>
               <span class="text-[10px] font-mono font-bold tracking-wider uppercase bg-purple-500/20 text-purple-300 border border-purple-400/30 px-2 py-0.5 rounded-full flex items-center gap-1">
@@ -340,7 +381,7 @@
               </span>
             </div>
 
-            <h2 class="text-base sm:text-lg font-bold text-fuchsia-200 group-hover:text-emerald-300 transition-colors duration-300 flex items-center justify-between">
+            <h2 class="text-base font-bold text-fuchsia-200 group-hover:text-emerald-300 transition-colors duration-300 flex items-center justify-between">
               Free Offline PDF Editor
               <i data-lucide="arrow-up-right" class="w-4 h-4 text-emerald-300 opacity-80 group-hover:opacity-100 transition-all transform group-hover:translate-x-1 group-hover:-translate-y-1"></i>
             </h2>
@@ -360,12 +401,12 @@
           </div>
         </a>
 
-        <!-- Tool Card 3: Age Calculator Studio -->
+        <!-- Tool Card 4: Age Calculator Studio -->
         <a href="https://mohamedaslamka-mabjas.github.io/age-calculator/" 
            target="_blank" 
            rel="noopener noreferrer" 
            onclick="playClickSound()"
-           class="water-glass group relative rounded-2xl p-4 sm:p-5 text-left flex flex-col justify-between overflow-hidden cursor-pointer">
+           class="water-glass group relative rounded-2xl p-4 text-left flex flex-col justify-between overflow-hidden cursor-pointer">
           
           <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
             <div class="shimmer-bar h-full w-full"></div>
@@ -373,7 +414,7 @@
 
           <div>
             <div class="flex items-center justify-between mb-2">
-              <div class="w-9 h-9 sm:w-11 sm:h-11 rounded-xl bg-amber-500/20 border border-amber-400/40 flex items-center justify-center text-amber-300 group-hover:scale-110 group-hover:bg-amber-500/30 transition-all duration-300 shadow-lg">
+              <div class="w-9 h-9 rounded-xl bg-amber-500/20 border border-amber-400/40 flex items-center justify-center text-amber-300 group-hover:scale-110 group-hover:bg-amber-500/30 transition-all duration-300 shadow-lg">
                 <i data-lucide="calculator" class="w-5 h-5"></i>
               </div>
               <span class="text-[10px] font-mono font-bold tracking-wider uppercase bg-amber-500/20 text-amber-300 border border-amber-400/30 px-2 py-0.5 rounded-full flex items-center gap-1">
@@ -381,7 +422,7 @@
               </span>
             </div>
 
-            <h2 class="text-base sm:text-lg font-bold text-amber-200 group-hover:text-cyan-300 transition-colors duration-300 flex items-center justify-between">
+            <h2 class="text-base font-bold text-amber-200 group-hover:text-cyan-300 transition-colors duration-300 flex items-center justify-between">
               Age Calculator Studio
               <i data-lucide="arrow-up-right" class="w-4 h-4 text-cyan-300 opacity-80 group-hover:opacity-100 transition-all transform group-hover:translate-x-1 group-hover:-translate-y-1"></i>
             </h2>
@@ -405,7 +446,7 @@
     </main>
 
     <!-- Clean Footer Bar -->
-    <footer class="w-full text-center py-2">
+    <footer class="w-full text-center py-2 shrink-0">
       <div class="w-12 h-1 bg-gradient-to-r from-cyan-400 via-amber-300 to-purple-500 mx-auto rounded-full opacity-60"></div>
     </footer>
 
@@ -621,7 +662,6 @@
     });
 
     function renderCanvas() {
-      // Theme background color filling
       if (currentThemeStyle === 'pure-white') {
         ctx.fillStyle = '#ffffff';
       } else if (currentThemeStyle === 'dark') {
@@ -640,7 +680,6 @@
 
       ctx.fillRect(0, 0, width, height);
 
-      // Render Dynamic Background Elements
       particles.forEach((p) => {
         p.update();
         p.draw();
